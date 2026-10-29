@@ -1,9 +1,9 @@
 //=============================================================================
-// [Filename]       tb_and.sv
+// [Filename]       alu.sv
 // [Project]        -
-// [Author]         Luis Namigtle
+// [Author]         Irving Kao
 // [Language]       SystemVerilog
-// [Created]        Jan 2026
+// [Created]        May 2026
 // [Modified]       -
 // [Description]    - 
 // [Notes]          -
