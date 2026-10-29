@@ -162,3 +162,64 @@ This enables the graphical simulation mode, allowing signal transitions to be in
 ### 7. Clean generated files
 
 ```bash
+make clean
+```
+
+This removes generated simulation, log, and waveform directories associated with the selected working directory.
+
+## Verification Flow
+
+The separate verification environment uses its own Makefile:
+
+`verification/scripts/makefiles/Makefile.xilinx`
+
+To initialize its working directory:
+
+```bash
+export GIT_ROOT=$(git rev-parse --show-toplevel)
+export UVM_WORK="$GIT_ROOT/work/uvm"
+mkdir -p "$UVM_WORK" && \
+cd "$UVM_WORK" && \
+ln -sf "$GIT_ROOT/verification/scripts/makefiles/Makefile.xilinx" Makefile
+```
+
+The same Make targets are available for this flow:
+
+```bash
+make compile
+make elaborate
+make sim
+```
+
+To run with a different configured test or verbosity, the Makefile provides variables such as `TEST`, `VERBOSITY`, and `SEED`. Their behavior depends on the selected verification environment and available test classes.
+
+## Automation Scripts
+
+The `scripts/vivado/` directory contains Tcl scripts for the compilation, elaboration, simulation, waveform probing, coverage, and relaunch stages.
+
+The Makefile coordinates these scripts, keeping the simulation workflow repeatable and reducing the need to execute each Vivado command manually.
+
+## Results and Evidence
+
+Screenshots of successful compilation, simulator output, and waveform inspection can be added to the repository to document the results.
+
+Simulation should be considered successful only after the actual tool output and expected signal behavior have been checked.
+
+## Key Concepts
+
+- Combinational RTL design using SystemVerilog.
+- Parameterized ALU implementation.
+- Arithmetic and logical operations.
+- Status flag generation.
+- Direct testbench stimulus.
+- Automated compilation and elaboration with GNU Make.
+- Vivado Tcl-based simulation workflows.
+- Separation of RTL design and verification files.
+
+## Future Improvements
+
+Potential improvements include expanding the ALU testbench to cover all supported operations, adding self-checking assertions, measuring functional coverage, and extending the verification environment with additional directed and randomized tests.
+
+## Disclaimer
+
+This project is intended for educational purposes and as part of an RTL design and verification portfolio. The documented commands describe the intended Make-based workflow; successful execution depends on the local Vivado installation, environment configuration, and the current state of the verification files.
